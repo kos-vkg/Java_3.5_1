@@ -1,0 +1,37 @@
+# This workflow will build a Java project with Maven
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+name: Java CI # как называется Workflow
+
+name: Java CI with Maven
+on: [push] # когда срабатывает (на push)
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+jobs: # какие задачи делаем
+  build: # сборка
+    runs-on: ubuntu-latest # на какой ОС запускаем
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - name: Build with Maven
+      run: mvn   -B –e verify   
+    steps: # какие шаги выполняем
+      - uses: actions/checkout@v2 # выкачиваем репо
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1 # устанавливаем JDK
+        with:
+          java-version: 11 # версия для установки
+      - name: Build with Maven
+        run: mvn -B -e verify # запускаем Maven
